@@ -1,0 +1,77 @@
+\documentclass[pdf, fleqn, compress]{beamer}
+\usepackage{york_beamer_template}
+\usepackage{tikz-cd}
+\usepackage{frcursive}
+\usepackage{mathrsfs}
+
+\newcommand{\arr}{\text{\textsl{\textcursive{r}}}}
+
+\newcommand{\nord}[1]{\boldsymbol{:}\!#1\!\boldsymbol{:}}
+
+\graphicspath{{/../fig/}}
+
+\setlist[itemize,1]{itemsep=1em, leftmargin=0em}
+\setitemize{label=\usebeamerfont*{itemize item}%
+  \usebeamercolor[dark-teal!50!ebor]{itemize item}
+  \usebeamertemplate{itemize item}}
+
+\title[Short Title]{Long Title}
+\author[Short Author]{Long Author}
+\institute{Institution (Probably York)}
+\date{\today}
+
+\begin{document}
+
+\begin{nonavigation}
+%-------------------------------------------------------------------
+%   Begin Frontmatter (Frames here have no head/foot and no logo)
+%-------------------------------------------------------------------
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+%-------------------------------------------------------------------
+%   End Frontmatter
+%-------------------------------------------------------------------
+\end{nonavigation}
+
+
+\section{Section 1}
+
+\begin{frame}{Frame 1}
+	What is a Frame
+	\begin{itemize}
+		\item A slide in beamer
+		\pause
+		\item That may contain pauses
+		\begin{itemize}
+			\item Lists may also have lists embedded within them
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\section{Section 2}
+
+\begin{frame}{Frame}
+	\begin{itemize}
+		\item Frames may also have equations
+		\begin{equation}
+			E^2 = p^2 c^2 + m^2 c^4
+		\end{equation}
+		\item We can also do citations \cite{knuth1986computers}.
+	\end{itemize}
+\end{frame}
+
+\begin{nonavigation}
+\appendix
+
+\begin{frame}{References}
+	\fontsize{8pt}{7.2}\selectfont
+	\bibliographystyle{alpha}
+	\bibliography{biblio}
+\end{frame}
+
+\end{nonavigation}
+
+\end{document}

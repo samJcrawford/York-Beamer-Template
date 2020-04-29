@@ -1,0 +1,304 @@
+\usepackage{xcolor}
+\usepackage[T1]{fontenc}
+\usepackage{enumitem}
+
+\definecolor{dark-teal}{HTML}{00627E}
+\definecolor{ebor}{HTML}{25303B}
+\definecolor{back-grey}{HTML}{E6E6E6}
+
+\renewcommand{\rmdefault}{ptm}
+\renewcommand{\sfdefault}{phv}
+
+%----------------------------------------------------------------------------
+%	NOTE: 
+%----------------------------------------------------------------------------
+
+
+%----------------------------------------------------------------------------
+%	THEOREM STYLES
+%----------------------------------------------------------------------------
+
+\definecolor{viridian}{rgb}{0.25, 0.51, 0.43} 
+\definecolor{ocre}{rgb}{0.13, 0.26, 0.22}
+\definecolor{somegreen}{rgb}{0.12, 0.3, 0.17} % Just testing new colours
+\definecolor{cambridgeblue}{rgb}{0.64, 0.76, 0.68}
+
+\definecolor{darkgunmetal}{RGB}{18, 41, 50}
+\definecolor{eggblue}{RGB}{125, 226, 209}
+
+\usepackage{amsmath,amsfonts,amssymb,amsthm} % For math equations, theorems, symbols, etc
+
+\newcommand{\intoo}[2]{\mathopen{]}#1\,;#2\mathclose{[}}
+\newcommand{\ud}{\mathop{\mathrm{{}d}}\mathopen{}}
+\newcommand{\intff}[2]{\mathopen{[}#1\,;#2\mathclose{]}}
+\newtheorem{notation}{Notation}[section]
+
+\let\theorem\relax
+
+\makeatletter
+\def\th@mystyle{%
+    \normalfont % body font
+    \setbeamercolor{block title example}{bg=dark-teal,fg=gray!10}
+    \setbeamerfont{block title example}{family=\rmfamily}
+    \setbeamercolor{block body example}{bg=dark-teal!20,fg=black}
+    \setbeamerfont{block body example}{family=\rmfamily, series=\it}
+    \def\inserttheoremblockenv{exampleblock}
+  }
+\makeatother
+\theoremstyle{mystyle}
+\newtheorem*{theorem}{Theorem}
+
+\mode<presentation>
+{
+	\usetheme{Dresden}
+	\setbeamercolor*{palette secondary}{use=structure,fg=ebor}
+	\setbeamercolor*{palette tertiary}{use=structure,fg=back-grey,bg=dark-teal}
+	\setbeamercolor{title}{fg=ebor}
+	\setbeamercolor{frametitle}{fg=ebor}
+	\setbeamercolor{structure}{fg=ebor}
+	\setbeamercolor{institute in head/foot}{fg=ebor}
+	
+%----------------------------------------------------------------------------
+%	NOTE: Here is where all the font details are specified
+%----------------------------------------------------------------------------
+	
+	\setbeamerfont{title}{size*={20}{24}, series=\bfseries, family=\rmfamily}
+	\setbeamerfont{frametitle}{size*={14}{16}, series=\bfseries, family=\rmfamily}
+	\setbeamerfont{title page}{size*={10}{12}, series=\bfseries, family=\rmfamily}
+	\setbeamerfont{itemize body}{size*={10}{12}}
+
+	
+	\usebackgroundtemplate{\includegraphics[width=\paperwidth]{background.png}}
+}
+\usefonttheme{professionalfonts}
+%\usefonttheme{serif}
+\beamertemplatenavigationsymbolsempty
+
+% Options to edit the title page
+
+\defbeamertemplate*{title page}{customized}[1][]
+{
+    \centering
+    \usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par
+    \usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par
+    \bigskip
+    \usebeamerfont{author}\insertauthor\par
+% \usebeamerfont{institute}\insertinstitute\par % Commenting this out to use a logo instead
+    \bigskip
+    \includegraphics[width=0.3\framewidth]{logo.png} \\
+    \usebeamerfont{date}\insertdate\par
+    \usebeamercolor[fg]{titlegraphic}\inserttitlegraphic
+}
+
+% This stuff messes around with the footer in various ways
+
+\newcommand{\frameofframes}{/}
+\newcommand{\setframeofframes}[1]{\renewcommand{\frameofframes}{#1}}
+
+\setframeofframes{/}
+\makeatletter
+\setbeamertemplate{footline}{%
+    \begin{beamercolorbox}[colsep=1.5pt]{upper separation line foot}
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,%
+        leftskip=.3cm,rightskip=.3cm plus1fil]{author in head/foot}%
+        \leavevmode{\usebeamerfont{author in head/foot}\insertshortauthor}%
+        \hfill%
+        {\usebeamerfont{institute in head/foot}\usebeamercolor[fg]{institute in head/foot}\insertshortinstitute}%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,%
+        leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
+        {\usebeamerfont{title in head/foot}\insertshorttitle}%
+        \hfill%
+        {\usebeamerfont{frame number}\usebeamercolor[fg]{frame number}\insertframenumber~\frameofframes~\inserttotalframenumber}
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[colsep=1.5pt]{lower separation line foot}
+    \end{beamercolorbox}
+  }
+\makeatother
+
+% This might be useful for title frame
+\makeatletter
+\newenvironment{nonavigation}{\let\orig@insertnavigation=\insertnavigation\def\insertnavigation##1{\phantom{\orig@insertnavigation{##1}}}
+    \usebackgroundtemplate{\includegraphics[width=\paperwidth]{background-no-logo.png}}
+}{}
+\makeatother
+
+%----------------------------------------------------------------------
+%	NOTE: An attempt at copying fancyStructure environment boxes
+%----------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------
+%	THEOREM STYLES
+%----------------------------------------------------------------------------------
+
+\usepackage{yfonts} % Used for fraktur/gothic text (for Lemma headings)
+
+\usepackage{amsmath,amsfonts,amssymb,amsthm} % For math equations, theorems, symbols, etc
+
+\renewcommand{\intoo}[2]{\mathopen{]}#1\,;#2\mathclose{[}}
+\renewcommand{\ud}{\mathop{\mathrm{{}d}}\mathopen{}}
+\renewcommand{\intff}[2]{\mathopen{[}#1\,;#2\mathclose{]}}
+
+% Boxed/framed environments
+\newtheoremstyle{ocrenumbox}% % Theorem style name
+{0pt}% Space above
+{0pt}% Space below
+{\normalfont}% % Body font
+{2pt}% Indent amount
+{\small\bf\sffamily\color{ocre!80!black}}% % Theorem head font
+{\;}% Punctuation after theorem head
+{0.25em}% Space after theorem head
+{\rmfamily\color{ocre!80!black}\thmname{#1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}\@upn{#2}}% Theorem text (e.g. Theorem 2.1)
+\thmnote{\nobreakspace\the\thm@notefont\slshape\bfseries\color{black!80} \hfill \nobreakspace#3\\ \color{ocre!50}\rule[+8pt]{\textwidth}{0.4pt}}}% Optional theorem note
+
+\newtheoremstyle{blacknumex}% Theorem style name
+{5pt}% Space above
+{5pt}% Space below
+{\normalfont}% Body font
+{} % Indent amount
+{\small\bf\sffamily}% Theorem head font
+{\;}% Punctuation after theorem head
+{0.25em}% Space after theorem head
+{\small\rmfamily{\tiny\ensuremath{\blacksquare}}\nobreakspace\thmname{#1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}\@upn{#2}}% Theorem text (e.g. Theorem 2.1)
+\thmnote{\nobreakspace\the\thm@notefont\rmfamily\bfseries \hspace*{\fill} \nobreakspace#3\\}}% Optional theorem note
+
+\newtheoremstyle{blacknumbox} % Theorem style name
+{5pt}% Space above
+{5pt}% Space below
+{\normalfont}% Body font
+{}% Indent amount
+{\small\bf\sffamily}% Theorem head font
+{\;}% Punctuation after theorem head
+{0.25em}% Space after theorem head
+{\large\rmfamily\thmname{#1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}\@upn{#2}}% Theorem text (e.g. Theorem 2.1)
+\thmnote{\nobreakspace\the\thm@notefont\large\rmfamily\slshape\color{black!80} \hspace*{\fill} \nobreakspace(#3)}\\ \rule[+1mm]{\textwidth}{0.2mm}  \\}% Optional theorem note
+
+% Non-boxed/non-framed environments
+\newtheoremstyle{ocrenum}% % Theorem style name
+{5pt}% Space above
+{5pt}% Space below
+{\normalfont}% % Body font
+{}% Indent amount
+{\small\bf\sffamily\color{ocre}}% % Theorem head font
+{\;}% Punctuation after theorem head
+{0.25em}% Space after theorem head
+{\rmfamily\color{black}{\large\rmfamily\thmname{#1}}\nobreakspace\thmnumber{\@ifnotempty{#1}{}\@upn{#2}}% Theorem text (e.g. Theorem 2.1)
+\thmnote{\nobreakspace\the\thm@notefont\rmfamily\bfseries\color{black}  \nobreakspace(#3)}} % Optional theorem note
+\renewcommand{\qedsymbol}{$\blacksquare$}% Optional qed square
+\makeatother
+
+% Non-boxed/non-framed environments
+\newtheoremstyle{ocrenumfrak}% % Theorem style name
+{5pt}% Space above
+{5pt}% Space below
+{\normalfont}% % Body font
+{}% Indent amount
+{\small\bf\sffamily\color{ocre}}% % Theorem head font
+{\;}% Punctuation after theorem head
+{0.25em}% Space after theorem head
+{\rmfamily\color{black}{\large\textswab{\thmname{#1}}}\nobreakspace\thmnumber{{#2}}% Theorem text (e.g. Theorem 2.1)
+	\thmnote{\nobreakspace\the\thm@notefont\rmfamily\bfseries\color{black}  \nobreakspace(#3)}} % Optional theorem note
+\renewcommand{\qedsymbol}{$\blacksquare$}% Optional qed square
+\makeatother
+
+
+% Defines the theorem text style for each type of theorem to one of the three styles above
+\newcounter{dummy} 
+\numberwithin{dummy}{section}
+
+\theoremstyle{ocrenumbox}
+\newtheorem{theoremeT}[dummy]{Theorem} % Actual environment defined after boxes
+\newtheorem{exampleT}{Example}[section] % Actual environment defined after boxes
+\newtheorem{definitionT}{Definition}[section] % Actual environment defined after boxes
+\newtheorem{corollaryT}[dummy]{Corollary}
+
+\theoremstyle{blacknumex}
+\newtheorem{exerciseT}{Exercise}[section] % Actual environment defined after boxes
+
+\theoremstyle{blacknumbox}
+\newtheorem{vocabulary}{Vocabulary}[section]
+
+\theoremstyle{ocrenum}
+\newtheorem{propT}[dummy]{Proposition} % Actual environment defined after boxes
+
+
+
+%----------------------------------------------------------------------------------
+%	DEFINITION OF COLORED BOXES
+%----------------------------------------------------------------------------------
+
+\RequirePackage[framemethod=default]{mdframed} % Required for creating the theorem, definition, exercise and corollary boxes
+
+% Theorem box
+\newmdenv[skipabove=7pt,
+skipbelow=7pt,
+backgroundcolor=cambridgeblue!10,
+linecolor=ocre,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=5pt,
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=0.5mm,
+innerbottommargin=5pt]{tBox}
+
+% Exercise box	  
+\newmdenv[skipabove=7pt,
+skipbelow=7pt,
+rightline=false,
+leftline=true,
+topline=false,
+bottomline=false,
+backgroundcolor=ocre!10,
+linecolor=ocre,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=5pt,
+innerbottommargin=5pt,
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=4pt]{eBox}	
+
+% Definition box
+\newmdenv[skipabove=7pt,
+skipbelow=7pt,
+rightline=false,
+leftline=true,
+topline=false,
+bottomline=false,
+linecolor=ebor!50!dark-teal,
+innerleftmargin=5pt,
+innerrightmargin=10pt,
+innertopmargin=5pt,
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=4pt,
+backgroundcolor=ebor!10,
+innerbottommargin=5pt]{dBox}	
+
+% Corollary box
+\newmdenv[skipabove=7pt,
+skipbelow=7pt,
+rightline=false,
+leftline=true,
+topline=false,
+bottomline=false,
+linecolor=ocre!50,
+backgroundcolor=cambridgeblue!10,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=5pt,
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=4pt,
+innerbottommargin=5pt]{cBox}
+
+% Creates an environment for each type of theorem and assigns it a theorem text style from the "Theorem Styles" section above and a colored box from above
+\renewenvironment{theorem}{\begin{tBox}\begin{theoremeT}}{\end{theoremeT}\end{tBox}}
+\newenvironment{exercise}{\begin{eBox}\begin{exerciseT}}{\end{exerciseT}\end{eBox}}				  
+\renewenvironment{definition}{\begin{dBox}\begin{definitionT}}{\end{definitionT}\end{dBox}}	
+%\newenvironment{example}{\begin{eBox}\begin{\part{example}T}}{\end{exampleT}\end{eBox}}
+\renewenvironment{example}{\begin{exampleT}}{\end{exampleT}}
+\renewenvironment{corollary}{\begin{cBox}\begin{corollaryT}}{\end{corollaryT}\end{cBox}}
+\newenvironment{prop}{\begin{propT} \itshape}{\end{propT}}
