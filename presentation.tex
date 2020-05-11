@@ -1,4 +1,4 @@
-\documentclass[pdf, fleqn, compress]{beamer}
+\documentclass[pdf, fleqn, compress, handout]{beamer}
 \usepackage{york_beamer_template}
 \usepackage{tikz-cd}
 \usepackage{frcursive}
@@ -8,6 +8,10 @@
 
 \newcommand{\nord}[1]{\boldsymbol{:}\!#1\!\boldsymbol{:}}
 
+\newcommand{\mathsterm}[1]{{\itshape\color{dark-teal!80}#1}}
+
+\newcommand{\ourex}[1]{{\itshape\color{viridian!70!black}#1}}
+
 \graphicspath{{/../fig/}}
 
 \setlist[itemize,1]{itemsep=1em, leftmargin=0em}
@@ -16,10 +20,9 @@
   \usebeamertemplate{itemize item}}
 
 \title[Graduate Research Symposium 2020]{The Casimir Effect in pAQFT: \\
-\large Another `Argument' for $\boldsymbol{1 + 2 + 3 + ... = - \frac{1}{12}}$}
+\large Another `Argument' for $\boldsymbol{1 + 2 + 3 + ... = - 1/12}$}
 \author[Sam Crawford]{Sam Crawford\\
 Supervisors: Kasia Rejzner and Beno\^it Vicedo}
-\institute{Institution (Probably York)}
 \date{\today}
 
 \begin{document}
@@ -39,29 +42,648 @@ Supervisors: Kasia Rejzner and Beno\^it Vicedo}
 \end{nonavigation}
 
 
-\section{Section 1}
-
-\begin{frame}{Frame 1}
-	What is a Frame
+\begin{frame}{Some Terminology}
 	\begin{itemize}
-		\item A slide in beamer
+		\item	\mathsterm{Spacetime}: A smooth pseudo-Riemannian manifold
+				$\mathcal{M}$.
+				It is \mathsterm{globally hyperbolic} if it can be written
+				\begin{equation}
+					\mathcal{M}
+						\simeq
+					\underbrace{\mathbb{R}}_{\text{time}}
+						\times
+					\underbrace{\Sigma}_{\text{space}}.
+				\end{equation}
+		\vspace{-0.5em}
 		\pause
-		\item That may contain pauses
+
+				\ourex{
+				E.g. the 2D globally hyperbolic cylinder
+				$\mathcal{M}_\mathrm{cyl} = \mathbb{R} \times S^1$.
+				}
+		\pause
+		\item	\mathsterm{Field}: Generally a smooth section of some fibre bundle.
+		
+		\pause
+				\ourex{For us simply a smooth, real-valued function
+				$\phi \in \mathcal{C}^\infty(\mathcal{M})$.}
+		\pause
+		\item	\mathsterm{(Classical) Observable:} A functional
+				$\mathcal{F}: \mathcal{C}^\infty(\mathcal{M}) \to \mathbb{C}$. 
+
+				\ourex{E.g. The stress-energy at
+						$(t_0, x_0) = \mathbf{x}_0 \in \mathcal{M}_\mathrm{cyl}$}
+				\ourex{
+					\begin{equation}
+						T_{\mathbf{x}_0}[\phi]
+							:=
+						\frac{1}{2}
+						{\underbrace{
+						\left(
+							\frac{\partial \phi}{\partial t} +
+							\frac{\partial \phi}{\partial x}
+						\right)
+						}_{\partial \phi}}^2
+						(t_0, x_0)					
+					\end{equation}
+				}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{A \textit{Little} Functional Analysis}
+	\begin{itemize}
+		\item	Just as we ask $\phi$ to be smooth,
+				we can impose smoothness on the functionals.
+		\item	The derivative of
+				$\mathcal{F}$ at $\phi \in \mathcal{C}^\infty(\mathcal{M})$
+				in the direction $h    \in \mathcal{C}^\infty(\mathcal{M})$ is
+				\begin{equation}
+					\left\langle 
+						\mathcal{F}^{(1)}[\phi]
+							,
+						h
+					\right\rangle
+						:=
+						\lim_{\epsilon \to 0}
+							\frac{
+								\mathcal{F}[\phi + \epsilon h] - \mathcal{F}[\phi]
+							}{
+								\epsilon
+							},
+				\end{equation}
+				wherever this limit exists.
+		\item 	If it exists $\forall \phi, h \in \mathcal{C}^\infty(\mathcal{M})$,
+				then $\mathcal{F}^{(1)}$ is a map from
+				field configurations to \mathsterm{distributions}
+				(a.k.a. `generalised functions')
+		
+				\ourex{
+					E.g. for $T_{\mathbf{x}_0}$ as before we have
+					\begin{align}
+						\left\langle
+							T_{\mathbf{x}_0}^{(1)}[\phi],
+							h
+						\right\rangle
+							&=
+						\partial \phi(\mathbf{x}_0)
+						\partial   h (\mathbf{x}_0)
+					\end{align}
+					}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{A Little More Functional Analysis}
+	\begin{itemize}
+		\item	Notational aside: For a distribution
+				$S \in {\mathcal{C}^\infty}'(\mathcal{M}^n)$
+				\begin{equation*}
+					\left\langle
+						S,
+						h_1 \otimes \cdots \otimes h_n
+					\right\rangle
+						=
+					\int_{\mathcal{M}^n}
+						S(\mathbf{x}_1, \ldots, \mathbf{x}_n)
+						h_1(\mathbf{x}_1) \cdots h_n(\mathbf{x}_n)
+					\, \mathrm{dV}^n					
+				\end{equation*}
+		\vspace{-1em}
+		\pause
+		\item	$\mathcal{F}$ is \mathsterm{smooth} if $\mathcal{F}^{(n)}$
+				exists $\forall n \in \mathbb{N}$.
+		\pause
+		\item	$\mathfrak{F}_\mathrm{reg}(\mathcal{M})$ the set of
+				\mathsterm{regular} functionals, defined such that
+				$\mathcal{F}^{(n)}[\phi]$ a \textit{bona fide} smooth function for all
+				$n   \in \mathbb{N},
+				\phi \in \mathcal{C}^\infty(\mathcal{M})$.
+		\vspace{1em}
+
+		\pause
+				\ourex{E.g. for $T_{\mathbf{x}_0}$ as before
+				\begin{itemize}
+					\item	$
+								T_{\mathbf{x}_0}^{(1)}[\phi](\mathbf{x})
+									=
+								-\partial(\delta(\mathbf{x} - \mathbf{x}_0)
+								 \partial \phi  (\mathbf{x}))
+							$
+					\item	$
+								T_{\mathbf{x}_0}^{(2)}[\phi](\mathbf{x}; \mathbf{y})
+									=
+								-\partial(\delta(\mathbf{x} - \mathbf{x}_0)
+								 \partial (\delta(\mathbf{x} - \mathbf{y})))
+							$
+					\item	$
+								T_{\mathbf{x}_0}^{(n)}[\phi] = 0
+							$,
+							for $n > 2$.
+				\end{itemize}
+				So $T_{\mathbf{x}_0}$ is smooth, but not regular.
+				}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Classical Dynamics}
+	\begin{itemize}
+		\item	Choice of field theory encapsulated in \mathsterm{Poisson bracket}
+				\begin{align}
+					\{\cdot, \cdot\}:
+					\mathfrak{F}_\mathrm{reg}(\mathcal{M})
+						\otimes
+					\mathfrak{F}_\mathrm{reg}(\mathcal{M})
+						&\to
+					\mathfrak{F}_\mathrm{reg}(\mathcal{M}), \nonumber \\
+					(\mathcal{F}, \mathcal{G})
+						&\mapsto
+					\left\langle 
+						E,
+						\mathcal{F}^{(1)}
+							\otimes
+						\mathcal{G}^{(1)}
+					\right\rangle.
+				\end{align}
+		\item	$E(\mathbf{x}; \mathbf{y}) \in {\mathcal{C}^\infty}'(\mathcal{M}^2)$
+				a bi-distribution called the \mathsterm{causal propagator}.	
+
+		\vspace{1em}
+				\ourex{Causal propagator for the massless scalar field on $\mathcal{M}_\mathrm{cyl}$
+				\begin{equation}
+					E(u, v; u', v')
+						=
+					% Without summation:
+					% -\frac{1}{2}
+					% \left(
+					% 	\left\lfloor
+					% 		\frac{u - u'}{2\pi}
+					% 	\right\rfloor +
+					% 	\left\lfloor
+					% 		\frac{v - v'}{2\pi}
+					% 	\right\rfloor +
+					% 	1
+					% \right).
+					%---------------------------------------
+					% With summation:
+					\frac{i}{4 \pi}
+					\sum_{n \in \mathbb{Z}^*}
+						\frac{1}{k}
+						\left(
+							e^{-ik(u - u')} +
+							e^{-ik(v - v')}
+						\right)
+				\end{equation}
+				}
+	\end{itemize}
+\end{frame}
+
+% ----------------------------------------
+%		Too much detail for time
+% ----------------------------------------
+% \begin{frame}{Classical Dynamics}
+% 	\begin{itemize}
+% 		\item	Laws of physics $\rightsquigarrow$
+% 				\mathsterm{equations of motion (EoM)} $\rightsquigarrow$
+% 				distinguished bi-solution, called the \mathsterm{causal propagator},
+% 				denoted $E$.
+		
+% 		\vspace{1em}
+% 				\ourex{For the massless scalar field on $\mathcal{M}_\mathrm{cyl}$, the equation of motion is
+% 				\begin{equation}
+% 					\partial_t^2\phi - \partial_x^2 \phi
+% 						=
+% 					4\partial_u \partial_v \phi
+% 						=
+% 					0,
+% 					\qquad \qquad (u, v = t \pm x)
+% 				\end{equation}
+% 				for which we have the causal propagator
+% 				\begin{equation}
+% 					E(u, v; u', v')
+% 						=
+% 					% Without summation:
+% 					% -\frac{1}{2}
+% 					% \left(
+% 					% 	\left\lfloor
+% 					% 		\frac{u - u'}{2\pi}
+% 					% 	\right\rfloor +
+% 					% 	\left\lfloor
+% 					% 		\frac{v - v'}{2\pi}
+% 					% 	\right\rfloor +
+% 					% 	1
+% 					% \right).
+% 					%---------------------------------------
+% 					% With summation:
+% 					\frac{i}{4 \pi}
+% 					\sum_{n \in \mathbb{Z}^*}
+% 						\frac{1}{k}
+% 						\left(
+% 							e^{-ik(u - u')} +
+% 							e^{-ik(v - v')}
+% 						\right)
+% 				\end{equation}
+% 				}
+% 		\vspace{-1em}
+% 		\item	Causal propagator $\rightsquigarrow$ \mathsterm{Poisson bracket}
+% 				\begin{align}
+% 					\{\cdot, \cdot\}:
+% 					\mathfrak{F}_\mathrm{reg}(\mathcal{M})
+% 						\otimes
+% 					\mathfrak{F}_\mathrm{reg}(\mathcal{M})
+% 						&\to
+% 					\mathfrak{F}_\mathrm{reg}(\mathcal{M}), \nonumber \\
+% 					(\mathcal{F}, \mathcal{G})
+% 						&\mapsto
+% 					\left\langle 
+% 						E,
+% 						\mathcal{F}^{(1)}
+% 							\otimes
+% 						\mathcal{G}^{(1)}
+% 					\right\rangle.
+% 				\end{align}
+% 	\end{itemize}
+% \end{frame}
+
+\begin{frame}{The Poisson Bracket}
+	\vspace{-2em}
+	\begin{equation}
+		\{\mathcal{F}, \mathcal{G}\}[\phi]
+			= 
+		\left\langle 
+			E,
+			\mathcal{F}^{(1)}[\phi]
+				\otimes
+			\mathcal{G}^{(1)}[\phi]
+		\right\rangle
+	\end{equation}
+	\begin{itemize}
+		\item	Can be extended to the space of \mathsterm{microcausal} functionals
+				$\mathfrak{F}_{\mu \mathrm{c}}(\mathcal{M}) \supset 
+				\mathfrak{F}_\mathrm{reg}(\mathcal{M})$
+		\pause
+		\item	Importantly, $\mathfrak{F}_{\mu \mathrm{c}}(\mathcal{M})$ contains
+				\mathsterm{local} observables such as \ourex{$T_{\mathbf{x}_0}$},
+		\pause
+		\item	and also $\mathfrak{F}_\mathrm{reg}(\mathcal{M})$ as a \textbf{dense} subspace
+		\pause
+		\item	Poisson bracket is the key ingredient from classical theory for quantisation.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Quantisation}
+	\begin{itemize}
+		\item	In pAQFT, quantisation is the \textit{deformation} of
+				the pointwise product $\cdot$ on $\mathfrak{F}_*(\mathcal{M})$ into a new,
+				associative product $\star$ such that
+				\begin{itemize}
+					\item[(i)] $\mathcal{F} \star \mathcal{G} = \mathcal{F} \cdot \mathcal{G} + \hbar \cdots$
+					\item[(ii)] $
+								\mathcal{F} \star \mathcal{G} -
+								\mathcal{G} \star \mathcal{F} =
+								i\hbar \{\mathcal{F}, \mathcal{G}\} +
+								\hbar^2 \cdots
+								$
+				\end{itemize}
+		\pause
+		\item	$\hbar$ a formal parameter (i.e. don't think too much about convergence)
 		\begin{itemize}
-			\item Lists may also have lists embedded within them
+			\item	So new algebra is in fact
+					$\left(\mathfrak{F}_*(\mathcal{M})[[\hbar]], \star \right)$
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
-\section{Section 2}
-
-\begin{frame}{Frame}
+\begin{frame}{Ordering Ambiguity}
 	\begin{itemize}
-		\item Frames may also have equations
-		\begin{equation}
-			E^2 = p^2 c^2 + m^2 c^4
-		\end{equation}
-		\item We can also do citations \cite{knuth1986computers}.
+		\item	\textbf{What should the quantum analogue of}
+				$\mathcal{F} \cdot \mathcal{G}$ \textbf{be?}
+		\pause
+		\item	Options include
+				$\mathcal{F} \star \mathcal{G}$,
+				$\mathcal{G} \star \mathcal{F}$,
+				$\frac{1}{2} \left( 
+				\mathcal{F} \star \mathcal{G} + 
+				\mathcal{G} \star \mathcal{F} \right)
+				$, etc...
+		\pause
+		\item	Map from classical to quantum observables called an
+				\mathsterm{ordering precription}.
+		\pause
+		\item   Therefore two separate tasks:
+		\begin{itemize}
+			\item[(i)] Find quantum algebra
+			\item[(ii)] Find map from classical to quantum algebra
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{The Star Product}
+	\begin{itemize}
+		\item	The star product used in pAQFT is (for a non-interacting theory)
+				\begin{equation}
+					\mathcal{F} \star_W
+					\mathcal{G}
+						:=
+					\mathcal{F} \cdot
+					\mathcal{G}
+						+
+					\sum_{n = 1}^\infty
+					\frac{\hbar^n}{n!}
+					\left\langle 
+						\!\left( \tfrac{i}{2} E + H \right)^{\otimes n},
+						\mathcal{F}^{(n)} \otimes
+						\mathcal{G}^{(n)}
+					\right\rangle
+				\end{equation}
+				\begin{itemize}
+					\item	$H$ is another distributional solution to the EoM.
+					\item	Chosen so $\star$ product well-defined on
+							$\mathfrak{F}_{\mu \mathrm{c}}(\mathcal{M})$.
+				\end{itemize}
+		\item	The sum $W = \tfrac{i}{2} E + H$ called a \mathsterm{Hadamard distribution}.
+				Physically interpreted as `vacuum-like' solution to EoM.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Hadamard Distributions}
+	\begin{itemize}
+		\item	{\color{ebor}\bfseries Good News:}
+				Hadamard distributions always exist on globally-hyperbolic spacetimes
+		\pause
+
+		\vspace{1em}
+		\ourex{
+				On the cylinder there is the \textit{ultrastatic vacuum state}
+				\begin{align}
+					W_\mathrm{cyl}(u, v; u', v')
+						=
+					\frac{1}{4 \pi}
+					\sum_{k = 1}^\infty
+						\frac{1}{k}
+						\left( 
+							e^{-ik(u - u')} +
+							e^{-ik(v - v')}
+						\right)
+				% Not enough space, would be nice to show though
+				% &		=
+				% 	\frac{i}{8 \pi}
+				% 	\left(
+				% 		\sum_{k \in \mathbb{Z}^*}
+				% 			\frac{1}{k}
+				% 			\left( 
+				% 				e^{ik(u - u')} +
+				% 				e^{ik(v - v')}
+				% 			\right) +
+				% 		\sum_{k \in \mathbb{Z}^*}
+				% 			\frac{1}{|k|}
+				% 			\left( 
+				% 				e^{ik(u - u')} +
+				% 				e^{ik(v - v')}
+				% 			\right)
+				%	\right)
+				\end{align}
+				}
+		\vspace{-1.5em}
+		\pause
+		\item	{\color{ebor}\bfseries Bad  News:}
+				Infinitely many exist for every spacetime.
+				In general with none being distinguished above the others.
+		\pause
+		\item	{\color{ebor}\bfseries Good News:}
+				Different choices of $W$ yield isomorphic products,
+				with the isomorphism given by
+				\begin{equation}
+					\alpha_{W' - W}(\mathcal{F})
+						:=
+					\mathcal{F}
+						+
+					\sum_{n = 1}^\infty
+					\frac{\hbar^{n}}{2^{n} n!}
+					\left\langle 
+						(W' - W)^{\otimes n},
+						\mathcal{F}^{(2n)}
+					\right\rangle
+				\end{equation}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Normal Ordering}
+	\begin{itemize}
+		\item	{\color{ebor}\bfseries Compromise:}
+				Quantum algebra
+				$
+				\mathfrak{A}_W
+					=
+				\left(
+					\mathfrak{F}_{\mu \mathrm{c}}(\mathcal{M})[[\hbar]],
+					\star_W
+				\right)
+				$
+				for some arbitrary choice of $W$,
+				but use an ordering prescription relative to that choice.
+		\pause
+		\item	I.e. for every $W$, define $\nord{-}_W$ such that,
+				for a classical observable $\mathcal{F}$
+				\begin{equation}
+					\alpha_{W' - W} (\nord{\mathcal{F}}_W)
+						=
+					\, \nord{\mathcal{F}}_{W'}.
+				\end{equation}
+		\pause \vspace{-2em}
+		\item	For \mathsterm{local} observables,
+				including \ourex{$T_{\mathbf{x}_0}$},
+				can use the \mathsterm{Hadamard parametrix}.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Hadamard Parametrix}
+	\begin{itemize}
+		\item	A way of splitting the $W(\mathbf{x}; \mathbf{y})$ distributions as
+				$
+					W(\mathbf{x}; \mathbf{y})
+						=
+					w(\mathbf{x}; \mathbf{y}) + 
+					W^\mathrm{sing}(\mathbf{x}; \mathbf{y})
+				$
+		\begin{itemize}
+			\item	$w(\mathbf{x}; \mathbf{y})$ can be made $\mathcal{C}^N$ for arbitrarily large $N$.
+		\end{itemize}
+		\pause
+		\item	For all Hadamard distributions,
+				$w(\mathbf{x}; \mathbf{y})$
+				only guaranteed to exist on some neighbourhood of
+				$
+					\{(\mathbf{x}, \mathbf{x}) \in \mathcal{M}^2
+						|
+					\mathbf{x} \in \mathcal{M}\}
+				$,
+		\begin{itemize}
+			\item	But when defined, we have $W' - W = w' - w$,
+			\item	I.e. $W^\mathrm{sing}$ is \textbf{the same} for all $W$.
+		\end{itemize}				
+		\pause
+		\item	Ordering map then $\nord{\mathcal{F}}_W = \alpha_{w}(\mathcal{F})$.
+		\pause
+
+		\vspace{1em}
+		\ourex{
+				Parametrix for cylinder:
+				\begin{equation*}
+					W^\mathrm{sing}_\mathrm{cyl}(u, v; u', v')
+						=
+					\frac{1}{4 \pi}
+					\int_{k = 0}^\infty
+						\frac{1}{k}
+						\left( 
+							e^{-ik(u - u')} +
+							e^{-ik(v - v')}
+						\right)
+					\, \mathrm{d}k
+				\end{equation*}
+		}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Ordering $T_{\mathbf{x}_0}$}
+	\begin{itemize}
+		\item 	Recall
+				$
+					\left\langle
+						T_{\mathbf{x}_0}^{(2)},
+						h_1 \otimes h_2
+					\right\rangle
+						=
+					\partial h_1(\mathbf{x}_0)
+					\partial h_2(\mathbf{x}_0)
+				$
+		\item   Hence, for any smooth function
+				$h \in \mathcal{C}^{\infty}(\mathcal{M}_\mathrm{cyl}^2)$,
+				\begin{align}
+					\alpha_h \left( T_{\mathbf{x}_0} \right)
+					&	=
+					T_{\mathbf{x}_0}
+						+
+					\frac{\hbar}{2}
+					\left\langle 
+						h,
+						T_{\mathbf{x}_0}^{(2)}
+					\right\rangle
+					\nonumber \\
+					&	=
+					T_{\mathbf{x}_0}
+						+
+					\frac{\hbar}{2}
+					\lim_{\mathbf{y} \to \mathbf{x}}
+						\left( \partial \otimes \partial \right) h(\mathbf{x}; \mathbf{y}).
+				\end{align}
+		\item   Hence, the `quantum correction' we must compute is
+				\begin{equation}
+					\frac{\hbar}{2}
+					\lim_{u' \to u}
+					\partial_u \partial_{u'}
+					\left(
+						W_\mathrm{cyl}(u, v; u', v) -
+						W_\mathrm{cyl}^\mathrm{sing}(u, v; u', v)
+					\right)
+				\end{equation}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Calculating the correction}
+	\begin{itemize}
+		\item	Recall the definitions of these distributions:
+				\begin{align*}
+					W_\mathrm{cyl}(u, v; u', v')
+					&	=
+					\frac{1}{4 \pi} \sum_{k = 1}^\infty
+						\frac{1}{k} \left( 
+							e^{-ik(u - u')} +
+							e^{-ik(v - v')}
+						 \right)
+					\\
+					W_\mathrm{cyl}^\mathrm{sing}(u, v; u', v')
+					&	=
+					\frac{1}{4 \pi} \int_{k = 0}^\infty
+						\frac{1}{k} \left( 
+							e^{-ik(u - u')} +
+							e^{-ik(v - v')}
+						 \right)
+						\mathrm{d}k
+				\end{align*}
+		\item	By defining $z_\epsilon = \epsilon + i(u - u')$,
+				can approximate by smooth functions:
+				\begin{subequations}
+					\begin{align}
+						\label{eq:w_cyl_approx}
+						\partial_u \partial_{u'}
+						W_\mathrm{cyl}(u; u')
+						&	=
+						\frac{1}{4\pi}
+						\lim_{\epsilon \to 0^+} \frac{e^{z_\epsilon}}{(1 - e^{z_\epsilon})^2}
+							\\
+						\partial_u \partial_{u'}
+						W_\mathrm{cyl}^\mathrm{sing}(u; u')
+						&	=
+						\frac{1}{4\pi}
+						\lim_{\epsilon \to 0^+}
+							- \frac{1}{z_\epsilon^2}.
+					\end{align}					
+				\end{subequations}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Calculating the correction}
+	\begin{itemize}
+		\item	The RHS of \eqref{eq:w_cyl_approx} can be written as a Laurent series
+				\begin{equation}					
+					\frac{e^{z_\epsilon}}{(1 - e^{z_\epsilon})^2}
+						=
+					- \frac{1}{z_\epsilon^2}
+					+ \sum_{n = 0}^\infty
+							\frac{\zeta(-n - 1)}{n!} z_\epsilon^n
+				\end{equation}
+		\item	Hence the quantum correction we want is
+				\begin{align*}
+					\frac{\hbar}{2}
+					\lim_{u' \to u}
+					\partial_u \partial_{u'}
+					\left(
+						W_\mathrm{cyl} -
+						W_\mathrm{cyl}^\mathrm{sing}
+					\right)
+					&	=
+					\frac{\hbar}{8 \pi}
+					\lim_{z_\epsilon \to 0}
+						\sum_{n = 0}^\infty
+							\frac{\zeta(-n - 1)}{n!} z_\epsilon^n 
+						\\
+					&	=
+					\frac{\hbar}{8 \pi} \frac{-1}{12}
+				\end{align*}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{$\boldsymbol{1 + 2 + \cdots \overset{?}{=} -1/12}$}
+	\begin{itemize}
+		\item	Taking the $u' \to u$ limit na\"ively would instead give
+				\begin{equation*}
+					\frac{\hbar}{2}
+					\lim_{u' \to u}
+					\partial_u \partial_{u'}
+					\left(
+						W_\mathrm{cyl} -
+						W_\mathrm{cyl}^\mathrm{sing}
+					\right)
+						\text{``} \! = \! \text{''}
+					\frac{\hbar}{8\pi}
+						\left( 
+							\sum_{k = 1}^\infty k
+								-
+							\int_{k = 0}^\infty k \, \mathrm{d}k
+						 \right).
+				\end{equation*}
+		\pause
+		\item	So perhaps $\sum_\mathbb{N} k$ is not $-1 / 12$, but
+				$\sum_\mathbb{N} k - \int_{\mathbb{R}_+} k \, \mathrm{d}k$ is!
 	\end{itemize}
 \end{frame}
 
