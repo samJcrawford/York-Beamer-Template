@@ -1,16 +1,77 @@
-\frametitle{The Stress-Energy Tensor}
-\begin{itemize}
-^^I^^I\item $T = \tfrac{1}{2}\partial \Phi^2$ is a component of the classical stress-energy tensor for our theory.
-^^I^^I\item For $\nord{T}$ to be a quantum primary, we would need the following diagram to commute:
-^^I^^I\begin{center}
+\frametitle{}
+\begin{columns}
+^^I^^I\begin{column}{0.5\textwidth}
+^^I^^I^^I\begin{tikzpicture}[scale=1.5]
+^^I^^I^^I^^I% Axes
+^^I^^I^^I^^I\draw[->, thick] (0,   -2) -- (0,   2) node (yaxis) [left ] {$t$};
+^^I^^I^^I^^I\draw[->, thick] (-1.8, 0) -- (1.8, 0) node (xaxis) [below] {$x$};
+^^I^^I^^I^^I% Identification lines
+^^I^^I^^I^^I\draw[dashed] (1, -2) -- (1, 0) node (2pi) [below left] {$2\pi$}
+^^I^^I^^I^^I^^I^^I^^I^^I-- (1, 2);
+^^I^^I^^I^^I\draw[dashed] (-1, -2) -- (-1, 0) node (2pi) [below left] {$-2\pi$}
+^^I^^I^^I^^I^^I^^I^^I^^I-- (-1, 2);
+^^I^^I^^I^^I% Causal neighbourhood
+^^I^^I^^I^^I\node[
+^^I^^I^^I^^I^^Idiamond,
+^^I^^I^^I^^I^^Ifill=dark-teal!20,
+^^I^^I^^I^^I^^Iminimum size=40pt,
+^^I^^I^^I^^I] at (0.5,0.6) {$U$};
+^^I^^I^^I^^I% Basepoint and images
+^^I^^I^^I^^I\node[
+^^I^^I^^I^^I^^Icircle,
+^^I^^I^^I^^I^^Ifill=black,
+^^I^^I^^I^^I^^Iminimum size=3pt,
+^^I^^I^^I^^I^^Iinner sep=0pt,
+^^I^^I^^I^^I^^Ilabel=below :{$x_0$}
+^^I^^I^^I^^I] at (0.7, 0.5) {};
+^^I^^I^^I^^I\node[
+^^I^^I^^I^^I^^Icircle,
+^^I^^I^^I^^I^^Ifill=gray,
+^^I^^I^^I^^I^^Iminimum size=3pt,
+^^I^^I^^I^^I^^Iinner sep=0pt
+^^I^^I^^I^^I] at (1.7, 0.5) {};
+^^I^^I^^I^^I\node[
+^^I^^I^^I^^I^^Icircle,
+^^I^^I^^I^^I^^Ifill=gray,
+^^I^^I^^I^^I^^Iminimum size=3pt,
+^^I^^I^^I^^I^^Iinner sep=0pt
+^^I^^I^^I^^I] at (-0.3, 0.5) {};
+^^I^^I^^I^^I\node[
+^^I^^I^^I^^I^^Icircle,
+^^I^^I^^I^^I^^Ifill=gray,
+^^I^^I^^I^^I^^Iminimum size=3pt,
+^^I^^I^^I^^I^^Iinner sep=0pt
+^^I^^I^^I^^I] at (-1.3, 0.5) {};
+^^I^^I^^I\end{tikzpicture}
+^^I^^I\end{column}
+^^I^^I\begin{column}{0.5\textwidth}
 ^^I^^I^^I\begin{tikzcd}
-^^I^^I^^I^^I\mathfrak{D}(\mathcal{M}) \rar["\mathfrak{D}^{(2, 0)}\chi"]
-^^I^^I^^I^^I^^I^^I^^I^^I\dar["\nord{\,T\,}_\mathcal{M}"]
-^^I^^I^^I^^I^^I& \mathfrak{D}(\mathcal{N})
-^^I^^I^^I^^I^^I^^I^^I^^I\dar["\nord{\,T\,}_\mathcal{N}"]
-^^I^^I^^I^^I^^I^^I^^I^^I\\
-^^I^^I^^I^^I\widetilde{\mathfrak{A}}(\mathcal{M}) \rar["\widetilde{\mathfrak{A}}\chi"]
-^^I^^I^^I^^I^^I& \widetilde{\mathfrak{A}}(\mathcal{N})
+^^I^^I^^I^^I\mathfrak{F}_\mathrm{loc}(U)
+^^I^^I^^I^^I^^I\rar["\chi_*"]
+^^I^^I^^I^^I^^I\dar[swap, "\nord{-}_U"]^^I&
+^^I^^I^^I^^I\mathfrak{F}_\mathrm{loc}(\mathcal{M}_\mathrm{cyl})
+^^I^^I^^I^^I^^I\dar["\nord{-}_{\mathcal{M}_\mathrm{cyl}}"]^^I\\
+^^I^^I^^I^^I\mathfrak{A}(U)
+^^I^^I^^I^^I^^I\rar[^^Iswap,
+^^I^^I^^I^^I^^I^^I^^I"\mathfrak{A}\chi"
+^^I^^I^^I^^I^^I]
+^^I^^I^^I^^I^^I\dar[
+^^I^^I^^I^^I^^I^^I^^Iswap,
+^^I^^I^^I^^I^^I^^I^^I"\alpha_H"
+^^I^^I^^I^^I^^I]
+^^I^^I^^I^^I^^I^^I&
+^^I^^I^^I^^I\mathfrak{A}(\mathcal{M}_\mathrm{cyl})
+^^I^^I^^I^^I^^I\dar{
+^^I^^I^^I^^I^^I^^I^^I\alpha_{H'}
+^^I^^I^^I^^I^^I}
+^^I^^I^^I^^I^^I\\
+^^I^^I^^I^^I\mathfrak{F}_{\mu c}(U)
+^^I^^I^^I^^I^^I\rar[
+^^I^^I^^I^^I^^I^^I^^Iswap,
+^^I^^I^^I^^I^^I^^I^^Iouter sep=1ex,
+^^I^^I^^I^^I^^I^^I^^I"\chi_* \circ \alpha_{\chi^* H' - H}"
+^^I^^I^^I^^I^^I]^^I&
+^^I^^I^^I^^I\mathfrak{F}_{\mu c}(\mathcal{M}_\mathrm{cyl})
 ^^I^^I^^I\end{tikzcd}
-^^I^^I\end{center}
-^^I\end{itemize}
+^^I^^I\end{column}
+^^I\end{columns}

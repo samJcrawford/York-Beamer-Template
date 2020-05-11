@@ -1,2 +1,4 @@
-\beamer@sectionintoc {1}{Section 1}{2}{0}{1}
-\beamer@sectionintoc {2}{Section 2}{4}{0}{2}
+\beamer@sectionintoc {1}{Intro: The Casimir Effect}{2}{0}{1}
+\beamer@sectionintoc {2}{Observables}{3}{0}{2}
+\beamer@sectionintoc {3}{Comparison Across Spacetimes}{6}{0}{3}
+\beamer@sectionintoc {4}{Doing the Calculation}{10}{0}{4}
