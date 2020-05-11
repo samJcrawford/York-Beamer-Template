@@ -2,31 +2,31 @@
 \usepackage[T1]{fontenc}
 \usepackage{enumitem}
 
-\definecolor{dark-teal}{HTML}{00627E}
-\definecolor{ebor}{HTML}{25303B}
-\definecolor{back-grey}{HTML}{E6E6E6}
-
 \renewcommand{\rmdefault}{ptm}
 \renewcommand{\sfdefault}{phv}
-
-%----------------------------------------------------------------------------
-%	NOTE: 
-%----------------------------------------------------------------------------
-
 
 %----------------------------------------------------------------------------
 %	THEOREM STYLES
 %----------------------------------------------------------------------------
 
-\definecolor{viridian}{rgb}{0.25, 0.51, 0.43} 
-\definecolor{ocre}{rgb}{0.13, 0.26, 0.22}
-\definecolor{somegreen}{rgb}{0.12, 0.3, 0.17} % Just testing new colours
-\definecolor{cambridgeblue}{rgb}{0.64, 0.76, 0.68}
 
+% Lots of colour options, not all are used
+\definecolor{dark-teal}{HTML}{00627E}
+\definecolor{ebor}{HTML}{25303B}
+\definecolor{viridian}{rgb}{0.25, 0.51, 0.43}
+\definecolor{somegreen}{rgb}{0.12, 0.3, 0.17}
+\definecolor{cambridgeblue}{rgb}{0.64, 0.76, 0.68}
 \definecolor{darkgunmetal}{RGB}{18, 41, 50}
 \definecolor{eggblue}{RGB}{125, 226, 209}
 
-\usepackage{amsmath,amsfonts,amssymb,amsthm} % For math equations, theorems, symbols, etc
+%   Primary color used for environments
+%   Currently equivalent to dark-teal!50!ebor
+\definecolor{envmain}{HTML}{13495c}
+
+\definecolor{back-grey}{HTML}{E6E6E6}
+
+
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
 
 \newcommand{\intoo}[2]{\mathopen{]}#1\,;#2\mathclose{[}}
 \newcommand{\ud}{\mathop{\mathrm{{}d}}\mathopen{}}
@@ -117,9 +117,13 @@
   }
 \makeatother
 
-% This might be useful for title frame
+% Frames in this environment have no navigation bar or background logo
+% Used for e.g. title frames and end slates
 \makeatletter
-\newenvironment{nonavigation}{\let\orig@insertnavigation=\insertnavigation\def\insertnavigation##1{\phantom{\orig@insertnavigation{##1}}}
+\newenvironment{nonavigation}{
+    \let\orig@insertnavigation=\insertnavigation\def\insertnavigation##1{
+        \phantom{\orig@insertnavigation{##1}}
+        }
     \usebackgroundtemplate{\includegraphics[width=\paperwidth]{background-no-logo.png}}
 }{}
 \makeatother
@@ -141,16 +145,16 @@
 \renewcommand{\intff}[2]{\mathopen{[}#1\,;#2\mathclose{]}}
 
 % Boxed/framed environments
-\newtheoremstyle{ocrenumbox}% % Theorem style name
+\newtheoremstyle{colournumbox}% % Theorem style name
 {0pt}% Space above
 {0pt}% Space below
 {\normalfont}% % Body font
 {2pt}% Indent amount
-{\small\bf\sffamily\color{ocre!80!black}}% % Theorem head font
+{\small\bf\sffamily\color{envmain!80!black}}% % Theorem head font
 {\;}% Punctuation after theorem head
 {0.25em}% Space after theorem head
-{\rmfamily\color{ocre!80!black}\thmname{#1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}\@upn{#2}}% Theorem text (e.g. Theorem 2.1)
-\thmnote{\nobreakspace\the\thm@notefont\slshape\bfseries\color{black!80} \hfill \nobreakspace#3\\ \color{ocre!50}\rule[+8pt]{\textwidth}{0.4pt}}}% Optional theorem note
+{\rmfamily\color{envmain!80!black}\thmname{#1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}\@upn{#2}}% Theorem text (e.g. Theorem 2.1)
+\thmnote{\nobreakspace\the\thm@notefont\slshape\bfseries\color{black!80} \hfill \nobreakspace#3\\ \color{envmain!50}\rule[+8pt]{\textwidth}{0.4pt}}}% Optional theorem note
 
 \newtheoremstyle{blacknumex}% Theorem style name
 {5pt}% Space above
@@ -175,30 +179,16 @@
 \thmnote{\nobreakspace\the\thm@notefont\large\rmfamily\slshape\color{black!80} \hspace*{\fill} \nobreakspace(#3)}\\ \rule[+1mm]{\textwidth}{0.2mm}  \\}% Optional theorem note
 
 % Non-boxed/non-framed environments
-\newtheoremstyle{ocrenum}% % Theorem style name
+\newtheoremstyle{colournum}% % Theorem style name
 {5pt}% Space above
 {5pt}% Space below
 {\normalfont}% % Body font
 {}% Indent amount
-{\small\bf\sffamily\color{ocre}}% % Theorem head font
+{\small\bf\sffamily\color{envmain}}% % Theorem head font
 {\;}% Punctuation after theorem head
 {0.25em}% Space after theorem head
 {\rmfamily\color{black}{\large\rmfamily\thmname{#1}}\nobreakspace\thmnumber{\@ifnotempty{#1}{}\@upn{#2}}% Theorem text (e.g. Theorem 2.1)
 \thmnote{\nobreakspace\the\thm@notefont\rmfamily\bfseries\color{black}  \nobreakspace(#3)}} % Optional theorem note
-\renewcommand{\qedsymbol}{$\blacksquare$}% Optional qed square
-\makeatother
-
-% Non-boxed/non-framed environments
-\newtheoremstyle{ocrenumfrak}% % Theorem style name
-{5pt}% Space above
-{5pt}% Space below
-{\normalfont}% % Body font
-{}% Indent amount
-{\small\bf\sffamily\color{ocre}}% % Theorem head font
-{\;}% Punctuation after theorem head
-{0.25em}% Space after theorem head
-{\rmfamily\color{black}{\large\textswab{\thmname{#1}}}\nobreakspace\thmnumber{{#2}}% Theorem text (e.g. Theorem 2.1)
-	\thmnote{\nobreakspace\the\thm@notefont\rmfamily\bfseries\color{black}  \nobreakspace(#3)}} % Optional theorem note
 \renewcommand{\qedsymbol}{$\blacksquare$}% Optional qed square
 \makeatother
 
@@ -207,11 +197,11 @@
 \newcounter{dummy} 
 \numberwithin{dummy}{section}
 
-\theoremstyle{ocrenumbox}
+\theoremstyle{colournumbox}
 \newtheorem{theoremeT}[dummy]{Theorem} % Actual environment defined after boxes
 \newtheorem{exampleT}{Example}[section] % Actual environment defined after boxes
 \newtheorem{definitionT}{Definition}[section] % Actual environment defined after boxes
-\newtheorem{corollaryT}[dummy]{Corollary}
+\newtheorem{propT}[dummy]{Proposition}
 
 \theoremstyle{blacknumex}
 \newtheorem{exerciseT}{Exercise}[section] % Actual environment defined after boxes
@@ -219,8 +209,8 @@
 \theoremstyle{blacknumbox}
 \newtheorem{vocabulary}{Vocabulary}[section]
 
-\theoremstyle{ocrenum}
-\newtheorem{propT}[dummy]{Proposition} % Actual environment defined after boxes
+\theoremstyle{colournum}
+\newtheorem{corollaryT}[dummy]{Corollary} % Actual environment defined after boxes
 
 
 
@@ -234,14 +224,14 @@
 \newmdenv[skipabove=7pt,
 skipbelow=7pt,
 backgroundcolor=cambridgeblue!10,
-linecolor=ocre,
+linecolor=envmain,
 innerleftmargin=5pt,
 innerrightmargin=5pt,
 innertopmargin=5pt,
 leftmargin=0cm,
 rightmargin=0cm,
 linewidth=0.5mm,
-innerbottommargin=5pt]{tBox}
+innerbottommargin=10pt]{tBox}
 
 % Exercise box	  
 \newmdenv[skipabove=7pt,
@@ -250,12 +240,12 @@ rightline=false,
 leftline=true,
 topline=false,
 bottomline=false,
-backgroundcolor=ocre!10,
-linecolor=ocre,
+backgroundcolor=envmain!10,
+linecolor=envmain,
 innerleftmargin=5pt,
 innerrightmargin=5pt,
 innertopmargin=5pt,
-innerbottommargin=5pt,
+innerbottommargin=10pt,
 leftmargin=0cm,
 rightmargin=0cm,
 linewidth=4pt]{eBox}	
@@ -267,7 +257,7 @@ rightline=false,
 leftline=true,
 topline=false,
 bottomline=false,
-linecolor=ebor!50!dark-teal,
+linecolor=envmain,
 innerleftmargin=5pt,
 innerrightmargin=10pt,
 innertopmargin=5pt,
@@ -275,24 +265,24 @@ leftmargin=0cm,
 rightmargin=0cm,
 linewidth=4pt,
 backgroundcolor=ebor!10,
-innerbottommargin=5pt]{dBox}	
+innerbottommargin=10pt]{dBox}	
 
-% Corollary box
+% Proposition box
 \newmdenv[skipabove=7pt,
 skipbelow=7pt,
 rightline=false,
 leftline=true,
 topline=false,
 bottomline=false,
-linecolor=ocre!50,
+linecolor=envmain!50,
 backgroundcolor=cambridgeblue!10,
 innerleftmargin=5pt,
 innerrightmargin=5pt,
-innertopmargin=5pt,
+innertopmargin=0pt,
 leftmargin=0cm,
 rightmargin=0cm,
 linewidth=4pt,
-innerbottommargin=5pt]{cBox}
+innerbottommargin=5pt]{pBox}
 
 % Creates an environment for each type of theorem and assigns it a theorem text style from the "Theorem Styles" section above and a colored box from above
 \renewenvironment{theorem}{\begin{tBox}\begin{theoremeT}}{\end{theoremeT}\end{tBox}}
@@ -300,5 +290,5 @@ innerbottommargin=5pt]{cBox}
 \renewenvironment{definition}{\begin{dBox}\begin{definitionT}}{\end{definitionT}\end{dBox}}	
 %\newenvironment{example}{\begin{eBox}\begin{\part{example}T}}{\end{exampleT}\end{eBox}}
 \renewenvironment{example}{\begin{exampleT}}{\end{exampleT}}
-\renewenvironment{corollary}{\begin{cBox}\begin{corollaryT}}{\end{corollaryT}\end{cBox}}
-\newenvironment{prop}{\begin{propT} \itshape}{\end{propT}}
+\newenvironment{prop}{\begin{pBox}\begin{propT}}{\end{propT}\end{pBox}}
+\renewenvironment{corollary}{\begin{corollaryT} \itshape}{\end{corollaryT}}

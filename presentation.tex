@@ -1,13 +1,11 @@
 \documentclass[pdf, fleqn, compress]{beamer}
-\usepackage{york_beamer_template}
+\usepackage{york-beamer-template}
 \usepackage{tikz-cd}
-\usepackage{mathrsfs}
 
-\newcommand{\arr}{\text{\textsl{\textcursive{r}}}}
+\graphicspath{{./fig/}}
 
-\newcommand{\nord}[1]{\boldsymbol{:}\!#1\!\boldsymbol{:}}
-
-\graphicspath{{/../fig/}}
+%	Font style for emphasis
+\newcommand{\mathsterm}[1]{{\itshape\color{dark-teal!80}#1}}
 
 \setlist[itemize,1]{itemsep=1em, leftmargin=0em}
 \setitemize{label=\usebeamerfont*{itemize item}%
@@ -21,6 +19,7 @@
 
 \begin{document}
 
+%	nonavigation environment defined in york-beamer-template.sty
 \begin{nonavigation}
 %-------------------------------------------------------------------
 %   Begin Frontmatter (Frames here have no head/foot and no logo)
@@ -35,6 +34,10 @@
 %-------------------------------------------------------------------
 \end{nonavigation}
 
+%-------------------------------------------------------------------
+%   NOTE: Top bar appears as in nonavigation environment
+%		  if no sections are defined
+%-------------------------------------------------------------------
 
 \section{Section 1}
 
@@ -62,6 +65,50 @@
 	\end{itemize}
 \end{frame}
 
+\begin{frame}[fragile]{Tikz}
+	\begin{itemize}
+		\item	Just a friendly reminder that frames containing Tikz diagrams need the \texttt{[fragile]} tag
+				\begin{equation}
+					\begin{tikzcd}
+						&
+						T(V)
+							\ar[d, dashed, "\exists ! \phi"]
+						\\
+						V
+							\ar[ur, hookrightarrow, "\iota"]
+							\ar[r, swap, "\forall \rho"]
+						&
+						W		
+					\end{tikzcd}
+				\end{equation}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{It Figures}
+	\begin{figure}
+		\centering
+			\includegraphics[width=\linewidth]{BalmerVisible}
+		\caption{Images placed in the \texttt{./fig} folder can be included without specifying a path or file extension.}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Environments}
+	\begin{definition}
+		This is a \mathsterm{definition}.
+	\end{definition}
+
+	\begin{prop}
+		This is a \mathsterm{proposition}.
+	\end{prop}
+
+	\begin{theorem}
+		This is a \mathsterm{theorem}.
+	\end{theorem}
+
+	\begin{corollary}
+		This is a \mathsterm{corollary}
+	\end{corollary}
+\end{frame}
 \begin{nonavigation}
 \appendix
 
