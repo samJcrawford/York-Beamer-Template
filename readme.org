@@ -1,1 +1,8 @@
-#+title: York Beamer Template
+#+title: University of York Beamer Template
+#+subtitle: An implementation of the University of York's presentation template in beamer
+
+[[./title.png]]
+
+* How to Download
+1. For latest version, click the green "code" button in the upper right and select "download zip".
+2. Alternatively, check the releases page [[https://github.com/samJcrawford/York-Beamer-Template/releases/][here]]
