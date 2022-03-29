@@ -2,6 +2,19 @@
 \usepackage[T1]{fontenc}
 \usepackage{enumitem}
 
+%	Font style for emphasis
+\newcommand{\mathsterm}[1]{{\itshape\color{dark-teal!80}#1}}
+
+\setlist[itemize,1]{itemsep=1em, leftmargin=0em}
+\setitemize{
+  label=\usebeamerfont*{itemize item}%
+  \usebeamercolor[dark-teal!50!ebor]{itemize item}
+  \usebeamertemplate{itemize item}}
+\setenumerate[1]{
+  label=\protect\usebeamerfont*{enumerate item}%
+  \protect\usebeamercolor[dark-teal!30!ebor]{enumerate item}
+  \insertenumlabel.}
+
 \renewcommand{\rmdefault}{ptm}
 \renewcommand{\sfdefault}{phv}
 
