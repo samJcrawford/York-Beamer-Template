@@ -83,6 +83,15 @@
 	
 	\usebackgroundtemplate{\includegraphics[width=\paperwidth]{background.png}}
 }
+
+\DeclareOption{nologo}{
+  \mode<presentation>{
+	\usebackgroundtemplate{\includegraphics[width=\paperwidth]{background-no-logo.png}}
+}
+}
+\DeclareOption*{\PackageWarning{york-beamer-template}{Unknown ‘\CurrentOption’}}
+\ProcessOptions\relax
+
 \usefonttheme{professionalfonts}
 %\usefonttheme{serif}
 \beamertemplatenavigationsymbolsempty
