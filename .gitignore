@@ -1,4 +1,4 @@
 presentation.*
 .auctex-auto
 !presentation.tex
-!presentation.pdf
+!*/*presentation.pdf
